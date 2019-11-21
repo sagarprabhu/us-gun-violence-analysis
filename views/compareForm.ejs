@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <style>
+            select{
+                background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+                background-position: 97% center;
+                background-repeat: no-repeat;
+                border: 1px solid #AAA;
+                color: #555;
+                font-size: inherit;
+                margin: 20px;
+                overflow: hidden;
+                padding: 5px 10px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 300px;
+            }
+
+            body {
+                padding-top: 5%;
+                padding-left: 7%;
+            }
+            .form-radio{
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                display: inline-block;
+                position: relative;
+                background-color: #f1f1f1;
+                color: #666;
+                top: 10px;
+                height: 30px;
+                width: 30px;
+                border: 0;
+                border-radius: 50px;
+                cursor: pointer;     
+                margin-right: 7px;
+                outline: none;
+            }
+            .form-radio:checked::before
+            {
+                position: absolute;
+                font: 13px/1 'Open Sans', sans-serif;
+                left: 11px;
+                top: 7px;
+                content: '\02143';
+                transform: rotate(40deg);
+            }
+            .form-radio:hover
+            {
+                background-color: #f7f7f7;
+            }
+            .form-radio:checked
+            {
+                background-color: #f1f1f1;
+            }
+            
+        </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+            <a class="logo" href="/">Home</a>
+            <nav>
+              <a href="#menu">Menu</a>
+            </nav>
+          </header>
+      
+          <!-- Nav -->
+          <nav id="menu">
+            <ul class="links">
+              <li><a href="ViewReport">Reports</a></li>
+              <li><a href="comparison">Comparison</a></li>
+              <li><a href="trends">Trends</a></li>
+              <li><a href="ranking">Ranking</a></li>
+              <li><a href="info">Database Information</a></li>
+            </ul>
+          </nav>
+      
+    <h1>Comparison Chart</h1>
+    <form action="/comparison" method="POST">
+
+     <div style="width:50%;float:left; ">  
+        Select a year: <br />
+        <select name='year'>
+            <option value="">All years</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+        </select>
+        <br />
+        <br />
+        Comparion on: <br />
+       <div>
+            <input type="radio" class="form-radio"  name="basedon" value="time" checked="checked">Time</input><br>
+            <input type="radio" class="form-radio" name="basedon" value="location">Location</input><br>
+            <input type="radio" class="form-radio" name="basedon" value="age">Age</input><br/><br />
+        </div>
+    </div>
+    
+        <div style="width:50%;float:right;">
+        Select Area: <br />
+        <select name="area">
+            <option value=""> All Areas </option>
+            <option value="Central"> Central </option>
+            <option value="Rampart"> Rampart </option>
+            <option value="Southwest"> Southwest </option>
+            <option value="Hollenbeck"> Hollenbeck </option>
+            <option value="Harbor"> Harbor </option>
+            <option value="Hollywood"> Hollywood </option>
+            <option value="Wilshire"> Wilshire </option>
+            <option value="West LA"> West LA </option>
+            <option value="Van Nuys"> Van Nuys </option>
+            <option value="West Valley"> West Valley </option>
+            <option value="Northeast"> Northeast </option>
+            <option value="77th Street"> 77th Street </option>
+            <option value="Newton"> Newton </option>
+            <option value="Pacific"> Pacific </option>
+            <option value="N Hollywood"> N Hollywood </option>
+            <option value="Foothill"> Foothill </option>
+            <option value="Devonshire"> Devonshire </option>
+            <option value="Southeast"> Southeast </option>
+            <option value="Mission"> Mission </option>
+            <option value="Olympic"> Olympic </option>
+            <option value="Topanga"> Topanga </option>
+          </select>
+          <br />
+
+          Age Groups: <br />
+          <select name='age'>
+            <option value="0-150">All ages</option>
+            <option value="0-18">Children 0-18</option>
+            <option value="19-25">Youth 19-25</option>
+            <option value="26-34">Young Adults 26-34</option>
+            <option value="35-54">Middle-aged Adults 35-54</option>
+            <option value="55-64">Old Adults 55-64</option>
+            <option value="65-150">Senior Citizens 65+</option>                
+        </select>
+        <br />
+
+        Timeframe: <br />
+        <select name='timeframe'>
+            <option value="0000 and 2400">All day</option>
+            <option value="0000 and 0200">12am to 2am</option>
+            <option value="0200 and 0400">2am to 4am</option>
+            <option value="0400 and 0600">4am to 6am</option>
+            <option value="0600 and 0800">6am to 8am</option>
+            <option value="0800 and 1000">8am to 10am</option>
+            <option value="1000 and 1200">10am to 12pm</option>
+            <option value="1200 and 1400">12pm to 2pm</option>
+            <option value="1400 and 1600">2pm to 4pm</option>
+            <option value="1600 and 1800">4pm to 6pm</option>
+            <option value="1800 and 2000">6pm to 8pm</option>
+            <option value="2000 and 2200">8pm to 10pm</option>
+            <option value="2200 and 2400">10pm to 12pm</option>
+        </select>
+        <br />
+        <br />
+    </div>
+    <div style="padding-left: 35%; padding-top: 30%">
+        <input type="submit" value="Submit" />
+    </div>
+    </form>
+
+
+    
+    <% if(data!=""){ %> 
+        <div style="width:1000px;">
+            
+            <div id = "viewChart" style="width:100%;float:right;">
+                    <canvas id = "compareChart"></canvas>
+            </div>
+          </div>
+        
+         <script>
+
+             var dataArray = [];
+             var labelList = [];
+
+             console.log(dataArray);
+
+            var j=0;
+            <% for(var i=0; i < data.length; i++) { %>
+                dataArray[j] = <%=data[i][1]%>
+                labelList[j] = "<%=data[i][0]%>"
+                j++;
+            <% } %>
+            
+            console.log(dataArray);
+            console.log(labelList);
+            const canvas = document.getElementById('compareChart');
+            const ctx = canvas.getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: labelList,
+                  datasets: [{
+                    label: "Crime By <%=gtype%>",
+                      data: dataArray,
+                        backgroundColor: "rgba(206, 27, 40,0.2)",
+                        borderColor: "rgba(206, 27, 40,1)",
+                        borderWidth: 2,
+                        hoverBackgroundColor: "rgba(206, 27, 40,0.4)",
+                        hoverBorderColor: "rgba(206, 27, 40,1)"
+                  }]
+                }
+            });
+          </script>
+
+        
+    <%}%> 
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

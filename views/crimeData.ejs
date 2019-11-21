@@ -1,0 +1,314 @@
+<!DOCTYPE html>  
+<html>  
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <!-- Header -->
+  <header id="header">
+      <a class="logo" href="/">Home</a>
+      <nav>
+        <a href="#menu">Menu</a>
+      </nav>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="ViewReport">Reports</a></li>
+        <li><a href="comparison">Comparison</a></li>
+        <li><a href="trends">Trends</a></li>
+        <li><a href="ranking">Ranking</a></li>
+        <li><a href="info">Database Information</a></li>
+      </ul>
+    </nav>
+
+  <title>Ranking page</title>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script> -->
+  <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+  <!-- <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            
+            datasets:[{
+                data: data
+                
+            }],
+
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script> -->
+
+  <style>
+    body{
+      padding: 30px 0px 10px 20px;
+    }
+    #crimeRank{
+      /* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
+      border-collapse: collapse;
+      width: 80%;
+    }
+    input[type=submit] {
+    /* padding:5px;  */
+    /* background-image: -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5); */
+    border: 1px solid #AAA;
+    cursor:pointer;
+    -webkit-border-radius: 50px;
+    font-size: inherit;
+    color: #555;
+    /* margin: 20px; */
+    border-radius: 50px; 
+    }   
+    h1, h2{
+        /* font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; */
+    }
+    h3{
+      text-transform: capitalize;
+      font-family: "Trebuchet MS", sans-serif;
+    }
+    select{
+      /* background-color: #ce1b28; */
+        /* background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5); */
+        /* background-position: 97% center;
+        background-repeat: no-repeat; */
+        border: 1px solid #AAA;
+        /* color: #555; */
+        font-size: inherit;
+        /* margin: 20px; */
+        overflow: hidden;
+        /* padding: 5px 10px; */
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 300px;
+    }
+    option{
+      background-color: #ce1b28;
+      width: 300px;
+    }
+    #crimeRank td, #crimeRank th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #crimeRank tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #crimeRank tr:hover {background-color: #ddd;}
+    
+    #crimeRank th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      text-transform: uppercase;
+      background-color: rgb(206,27,40); 
+      color: white;
+    }
+
+    .form-radio{
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                display: inline-block;
+                position: relative;
+                background-color: #f1f1f1;
+                color: #666;
+                top: 10px;
+                height: 30px;
+                width: 30px;
+                border: 0;
+                border-radius: 50px;
+                cursor: pointer;     
+                margin-right: 7px;
+                outline: none;
+            }
+            .form-radio:checked::before
+            {
+                position: absolute;
+                font: 13px/1 'Open Sans', sans-serif;
+                left: 11px;
+                top: 7px;
+                content: '\02143';
+                transform: rotate(40deg);
+            }
+            .form-radio:hover
+            {
+                background-color: #f7f7f7;
+            }
+            .form-radio:checked
+            {
+                background-color: #f1f1f1;
+            }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    
+</head>
+
+
+
+<body>
+  <br/>
+  <br/>
+    <div id = "tableChart" style="float:left;width:60%;">
+  <h1 style="padding-left:60%">RANKING PAGE</h1>
+  
+  <form action="/ranking" method=post>
+  <% {%>
+        <h3>Select ranking criteria:</h2> 
+        <select name="ranking" id= "Ranking" class ="selectBox">
+            <option value="area_crime"/> Rank Area By Crime
+            <option value="weapon_crime"/> Rank Weapon By Crime
+            <option value="victim_crime"/> Rank Victim Desent By Crime
+        </select>
+  </br>
+  <h3>Select crime:</h2> 
+        <select name="type" id="typeSelect" class ="selectBox">
+            <option value=""/> All Crimes
+            <option value="RAPE"/> Rape
+            <option value="THEFT"/> Theft
+            <option value="ASSAULT"/>Assault
+            <option value="FIREARMS"/>Firearms
+            <option value="HOMICIDE"/>Homicide
+            <option value="SHOTS FIRED"/>Shots Fired
+            <option value="KIDNAPPING"/>Kidnapping
+            <option value="DRUGS"/>Drugs 
+            <option value="MANSLAUGHTER"/>Manslaughter
+            <option value="SEXUAL CRIMES"/>Sexual Crimes
+            <option value="VANDALISM"/>Vandalism
+            <option value="BURGLARY"/>Burglary
+            <option value="ABORTION"/>Abortion
+            <option value="DRIVING"/>Driving
+        </select> 
+    </br>
+    <h3>Select ordering:</h2> 
+    <input type="radio" class="form-radio" name="ordering" value="DESC" checked="checked"> DESCENDING ORDER<br>
+    <input type="radio" class="form-radio" name="ordering" value="ASC"> ASCENDING ORDER<br>
+    </br>
+    <input type="submit" value="SUBMIT">
+  <% } %>
+  </form>
+</br>
+</br>
+</div> 
+  <%if (data.length > 0 ) { %>
+    <div id = "displaytable" style="width:40%;float:right;padding-top:6%">
+    <table id="crimeRank">
+        <%if (type =="area_crime") { %>
+          <tr>
+              <th>Rank</th>
+              <th>Area Name</th>
+              <th>Count</th>
+          </tr>
+          <% for(var i=0; i < data.length; i++) { %>
+            <tr>
+              <td><%= data[i].RANK %></td>
+              <td><%= data[i].AREA_NAME %></td>
+              <td><%= data[i].COUNT %></td>
+            </tr>
+            <% } %>
+          <% } %>
+        <%if (type =="weapon_crime") { %>
+            <tr>
+                <th>Rank</th>
+                <th>Weapon</th>
+                <th>Count</th>
+            </tr>
+            <% for(var i=0; i < data.length; i++) { %>
+              <tr>
+                <td><%= data[i].RANK %></td>
+                <td><%= data[i].WEAPON %></td>
+                <td><%= data[i].COUNT %></td>
+              </tr>
+              <% } %>
+            <% } %>
+            <%if (type =="victim_crime") { %>
+              <tr>
+                  <th>Rank</th>
+                  <th>Victim Descent</th>
+                  <th>Count</th>
+              </tr>
+              <% for(var i=0; i < data.length; i++) { %>
+                <tr>
+                  <td><%= data[i].RANK %></td>
+                  <td><%= data[i].DESCRIPTION %></td>
+                  <td><%= data[i].COUNT %></td>
+                </tr>
+                <% } %>
+              <% } %>
+      </table> 
+</br>
+</br>
+    </div>
+  <div id = "displaychart" style="padding-left:15%;width:85%;align-content: center">
+    <canvas id = "chart"></canvas>
+  </div>
+  <script>
+      var labelArray = [];
+      var dataArray = [];
+      var j=1;
+      var sum = 0;
+        <% for(var i=0; i < data.length; i++) { %>
+          dataArray[j] = <%=data[i].COUNT%>
+          sum = sum+dataArray[j];
+          <%if (type =="area_crime") { %>
+            labelArray[j] = "<%=data[i].AREA_NAME%>"
+          <% } %>  
+          <%if (type =="weapon_crime") { %>
+            labelArray[j] = "<%=data[i].WEAPON%>"
+          <% } %> 
+          <%if (type =="victim_crime") { %>
+            labelArray[j] = "<%=data[i].DESCRIPTION%>"
+          <% } %> 
+          j++;
+        <% } %>
+        dataArray[0]= <%=total[0].COUNT%> - sum;
+        labelArray[0] = "Others";
+        console.log(dataArray);
+        console.log(labelArray);
+        var ctx = document.getElementById('chart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+              
+              labels: labelArray,
+              datasets: [{
+                data: dataArray,
+                backgroundColor: [
+                  "#A30303",
+                  "#E6255A",
+                  "#FA6612",
+                  "#EC8707",
+                  "#F7CB07",
+                  "#F4F707",
+                  "#C8F707",
+                  "#71F707",
+                  "#499E06",
+                  "#0A6705",
+                  "#041601"
+                ],
+                borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                      }]
+            }
+        });
+    </script>
+  <% } %>
+
+
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/browser.min.js"></script>
+  <script src="/assets/js/breakpoints.min.js"></script>
+  <script src="/assets/js/util.js"></script>
+  <script src="/assets/js/main.js"></script>
+  
+</body>
+</html> 

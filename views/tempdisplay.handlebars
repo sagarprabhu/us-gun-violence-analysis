@@ -1,0 +1,226 @@
+<head>
+    <title>View Report</title>
+</head>
+{{!-- <style>
+    body {
+        background-color: whitesmoke;
+        background-image: url("./images/bg-01.jpg");
+        
+    }
+
+    input[type=text],
+    select,
+    date {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    } 
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+     .button {
+        border: none;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    } 
+
+    tr,
+    td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+        border: 1px solid #ddd;
+        padding: 4px;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+        background-color: #ddd;
+    }
+
+    #customers thead {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+</style> --}}
+
+<style>
+    body {
+        padding-top: 7%;
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    table {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    tr,
+    td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+        border: 1px solid #ddd;
+        padding: 4px;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: rgba(206, 27, 40, 0.4);
+    }
+
+    #customers tr:hover {
+        background-color: gray;
+    }
+
+    #customers thead {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: left;
+        background-color: rgba(206, 27, 40, 1);
+        color: white;
+    }
+</style>
+
+<center>
+</center>
+<h1 style="text-align: center">Area Wise Report</h1>
+<form action="/viewReport" method="POST">
+
+    <div style="float:left;width:50%">
+        Area name:
+        <select name="area" style="width:70%;padding-top:0%">
+            <option value=""> -- Select from below -- </option>
+            <option value="all"> All Area's </option>
+            <option value="Central"> Central </option>
+            <option value="Rampart"> Rampart </option>
+            <option value="Southwest"> Southwest </option>
+            <option value="Hollenbeck"> Hollenbeck </option>
+            <option value="Harbor"> Harbor </option>
+            <option value="Hollywood"> Hollywood </option>
+            <option value="Wilshire"> Wilshire </option>
+            <option value="West LA"> West LA </option>
+            <option value="Van Nuys"> Van Nuys </option>
+            <option value="West Valley"> West Valley </option>
+            <option value="Northeast"> Northeast </option>
+            <option value="77th Street"> 77th Street </option>
+            <option value="Newton"> Newton </option>
+            <option value="Pacific"> Pacific </option>
+            <option value="N Hollywood"> N Hollywood </option>
+            <option value="Foothill"> Foothill </option>
+            <option value="Devonshire"> Devonshire </option>
+            <option value="Southeast"> Southeast </option>
+            <option value="Mission"> Mission </option>
+            <option value="Olympic"> Olympic </option>
+            <option value="Topanga"> Topanga </option>
+        </select>
+
+        <br />
+        Date Occurred:
+        <input type="date" name="date" style="width:70%" value="hel" min="2009-12-31" />
+        <br />
+        <br />
+    </div>
+    <div style="float:right;width:50%">
+
+        Start Time:
+        <input type="text" name="starttime" placeholder="hhmm or hmm" style="width:70%" />
+        <br />
+        End Time:
+        <input type="text" name="endtime" placeholder="hhmm or hmm" style="width:70%" />
+    </div>
+
+
+    <div style="padding-left: 35%; padding-top: 20%">
+        <input type="submit" class="button" value="Fetch Result">
+    </div>
+</form>
+
+
+<br>
+<br>
+{{!-- </center> --}}
+
+
+
+
+{{#if NOCRIME}}
+<h2 style="padding-left:15%"><i>No crimes committed during this period</i></h2>
+{{/if}}
+{{#if data}}
+<center>
+    <table border='1' id="customers" style="padding-right:25%">
+        <thead>
+            <tr>
+                <td>DR_NO</td>
+                <td>CRIME</td>
+                <td>TIME</td>
+                <td>REPORTED_ON</td>
+                <td>AGE</td>
+                <td>SEX</td>
+                <td>DESCENT</td>
+                <td>STATUS</td>
+            </tr>
+        </thead>
+        {{#each data}}
+        <tr>
+            <td>{{this.[0]}}</td>
+            <td>{{this.[1]}}</td>
+            <td>{{this.[2]}}</td>
+            <td>{{this.[3]}}</td>
+            <td>{{this.[4]}}</td>
+            <td>{{this.[5]}}</td>
+            <td>{{this.[6]}}</td>
+            <td>{{this.[7]}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</center>
+{{/if}}
+<br />

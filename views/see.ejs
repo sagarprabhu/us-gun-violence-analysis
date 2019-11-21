@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <style>
+      body {
+        background-color: lightblue;
+        padding-top: 20%;
+        /* padding: 30px 500px 500px 500px;  */
+      }
+      .form-radio,
+      .myinput[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        display: inline-block;
+        position: relative;
+        background-color: #f1f1f1;
+        color: #666;
+        top: 10px;
+        height: 30px;
+        width: 30px;
+        border: 0;
+        /* / border-radius: 50px; */
+        cursor: pointer;
+        margin-right: 7px;
+        outline: none;
+      }
+
+      .form-radio {
+        border-radius: 50px;
+      }
+      .form-radio:checked::before,
+      .myinput[type="checkbox"]:checked::before {
+        position: absolute;
+        font: 13px/1 "Open Sans", sans-serif;
+        left: 11px;
+        top: 7px;
+        content: "\02143";
+        transform: rotate(40deg);
+      }
+      .form-radio:hover,
+      .myinput[type="checkbox"]:hover {
+        background-color: #f7f7f7;
+      }
+      .form-radio:checked,
+      .myinput[type="checkbox"]:checked {
+        background-color: #f1f1f1;
+      }
+    </style>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <a class="logo" href="/">Home</a>
+      <nav>
+        <a href="#menu">Menu</a>
+      </nav>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="ViewReport">Reports</a></li>
+        <li><a href="comparison">Comparison</a></li>
+        <li><a href="trends">Trends</a></li>
+        <li><a href="ranking">Ranking</a></li>
+        <li><a href="info">Database Information</a></li>
+      </ul>
+    </nav>
+    <h1 style="padding-left:40%;padding-top: 2%">TRENDS PAGE</h1>
+    <form action="/trends" method="post" style="padding-left:3%">
+      <% {%>
+      <div style="float:left;width:60%">
+        <h3>Select Area:</h3>
+        <div style="float: left;width:20%">
+          <input type="checkbox" class="myinput" name="area" value="Central" />
+          Central<br />
+          <input type="checkbox" class="myinput" name="area" value="Rampart" />
+          Rampart<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Southwest"
+          />Southwest<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Hollenbeck"
+          />Hollenbeck<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Harbor"
+          />Harbor<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Hollywood"
+          />Hollywood<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Wilshire"
+          />Wilshire<br />
+        </div>
+        <div style="float: left;width:20%">
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="West LA"
+          />West LA<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Van Nuys"
+          />Van Nuys<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="West Valley"
+          />West Valley<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Northeast"
+          />Northeast<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="77th Street"
+          />77th Street<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Newton"
+          />Newton<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Pacific"
+          />Pacific<br />
+        </div>
+        <div style="float: left;width:20%">
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="N Hollywood"
+          />N Hollywood<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Foothill"
+          />Foothill<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Devonshire"
+          />Devonshire<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Southeast"
+          />Southeast<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Mission"
+          />Mission<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Olympic"
+          />Olympic<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Topanga"
+          />Topanga<br />
+        </div>
+      </div>
+      <div style="float:right;width:40%">
+        <h3>Select Crime:</h3>
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="RAPE"
+          checked="checked"
+        />
+        RAPE<br />
+        <input type="radio" class="form-radio" name="crime" value="THEFT" />
+        THEFT<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="ASSAULT"
+        />ASSAULT<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="FIREARMS"
+        />FIREARMS<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="SEXUAL CRIMES"
+        />SEXUAL CRIMES<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="VANDALISM"
+        />VANDALISM<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="BURGLARY"
+        />BURGLARY<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="ABORTION"
+        />ABORTION<br />
+        <input
+          type="radio"
+          class="form-radio"
+          name="crime"
+          value="DRIVING"
+        />DRIVING<br />
+        <br />
+        <br />
+      </div>
+      <div style="padding-top:30%;padding-left:40%;">
+        <input type="submit" value="Submit" />
+      </div>
+
+      <% } %>
+    </form>
+
+    <% if(one!=""){%>
+    <br /><br />
+    <div class="chart">
+      <canvas id="chart-demo-1" width="300" height="100"></canvas>
+    </div>
+    <% {%>
+    <script>
+        /*var first=[];
+        first={<%=one[0]%>};
+        var second=[];
+        second={<%=one[1]%>};
+        var third=[];
+        third={<%=one[2]%>};*/
+
+      // console.log(<%=first%>);
+      // console.log(<%=second%>);
+      // console.log(<%=third%>);
+
+
+       var ctx = document.getElementById('chart-demo-1').getContext('2d');
+
+        var chart = new Chart(ctx, {
+
+          type: 'line',
+
+          data: {
+
+            labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+            datasets: [
+            {
+            label: "<%=area[0]%>",
+            borderColor: '#ff003f',
+            data: [<%=first%>]
+
+          },
+          {
+            label: "<%=area[1]%>",
+            borderColor: '#c300ff',
+            data: [<%=second%>]
+
+          },
+          {
+            label: "<%=area[2]%>",
+            borderColor: '#ffe100',
+            data: [<%=third%>]
+
+          }
+
+            ]
+          },
+          options:{
+            layout:{
+              padding:10,
+            },
+            legend:{
+              position:'bottom',
+            },
+            title:{
+              display:true,
+              text:'Crime Trends of Los Angeles City'
+            },
+            scales:{
+
+              xAxes:[{
+                scaleLabel:{
+                  dispaly:true,
+                  labelString:'Year'
+                }
+              }],
+              yAxes:[{
+                scaleLabel:{
+                  dispaly:true,
+                  labelString:'Count'
+                }
+              }]
+            }
+          }
+        });
+    </script>
+    <% } %>
+
+    <!-- <h2>Selected areas are:<%=area%></h2>
+
+    <h2>Selected crime is:<%=crime%></h2> -->
+    <%}%>
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

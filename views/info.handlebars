@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <br>
+    <div style="background-color: rgb(238, 20, 31); padding-bottom: 0px; padding-top: 0px"
+        class=" jumbotron container-fluid text-center">
+        <i>
+            <h2><b><u style="color:black">Los Angeles Crime Data Analysis</u></b></h2>
+        </i>
+    </div>
+
+    <div style="background-color: lightgrey; border-radius: 20px" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3><u>About Database</u></h3>
+                <p>
+                    <b><i> This dataset reflects incidents of crime in the City of Los Angeles dating back to 2010. The
+                            source is <a
+                                href="https://data.lacity.org/A-Safe-City/Crime-Data-from-2010-to-Present/y8tr-7khq"
+                                style="color: darkblue">data.lacity.org</a>
+                            which is updated
+                            every 14 days. We have a total of 13 tables. Click below buttons to get count of records
+                            in respective table </i></b>
+                </p>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-2">
+            <a href="/info?id=Incident"><input type="button" value="Incident" style="width: 100px"></a>
+            {{#if Incident}}
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Incident}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=Area"><input type="button" value="Area" style="width: 100px"></a>
+            {{#if Area}}
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Area}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=Case_Status"><input type="button" value="Case Status" style="width: 130px"></a>
+            {{#if Case_Status}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Case_Status}}</b>
+
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=Crime"><input type="button" value="Crime" style="width: 100px"></a>
+            {{#if Crime}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Crime}}</b>
+            {{/if}}
+        </div>
+        <div class="col-md-2">
+            <a href="/info?id=Descent"><input type="button" value="Descent" style="width: 100px"></a>
+            {{#if Descent}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Descent}}</b>
+            {{/if}}
+        </div>
+        <div class="col-md-2">
+            <a href="/info?id=Location"><input type="button" value="Location" style="width: 100px"></a>
+            {{#if Location}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Location}}</b>
+            {{/if}}
+        </div>
+        <br><br><br><br><br><br>
+        <div class="col-md-2">
+            <a href="/info?id=Method_Of_Operation"><input type="button" value="MOO" style="width: 100px"></a>
+            {{#if Method_Of_Operation}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Method_Of_Operation}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=Premise"><input type="button" value="Premise" style="width: 100px"></a>
+            {{#if Premise}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Premise}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=Reports"><input type="button" value="Reports" style="width: 130px"></a>
+            {{#if Reports}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Reports}}</b>
+            {{/if}}
+
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=UsedFor"><input type="button" value="Used For" style="width: 100px"></a>
+            {{#if UsedFor}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{UsedFor}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=UsedIn"><input type="button" value="Used In" style="width: 100px"></a>
+            {{#if UsedIn}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{UsedIn}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/info?id=Victim"><input type="button" value="Victim" style="width: 100px"></a>
+            {{#if Victim}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Victim}}</b>
+            {{/if}}
+        </div>
+        <br><br><br><br><br><br>
+        <div class="col-md-2">
+            <a href="/info?id=Weapon"><input type="button" value="Weapon" style="width: 100px"></a>
+            {{#if Weapon}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{Weapon}}</b>
+            {{/if}}
+
+        </div>
+        <br><br><br><br>
+    </div>
+
+</body>
+
+</html>
