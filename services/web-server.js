@@ -7,6 +7,7 @@ const home = require("./home.js");
 const info = require("./info.js");
 const comparisonPage = require("./compareChart.js");
 const viewReport = require("./viewReport.js");
+const ranking2 = require("./ranking2.js");
 const trends = require("./trends_2.js");
 const exphbs = require("express-handlebars");
 // const router = express.Router();
@@ -17,13 +18,24 @@ function initialize() {
     const app = express();
     httpServer = http.createServer(app);
 
-    app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+    var hbs = exphbs.create({
+      defaultLayout: "main",
+      // Specify helpers which are only registered on this instance.
+      helpers: {
+        inc: function(value, options) {
+          return parseInt(value) + 1;
+        }
+      }
+    });
+    //  app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+    app.engine("handlebars", hbs.engine);
     app.set("view engine", "handlebars");
     app.use(express.static(__dirname + "/../public"));
     app.use("/", home);
     app.use("/ranking", rankingPage);
     app.use("/comparison", comparisonPage);
     app.use("/viewReport", viewReport);
+    app.use("/ranking2", ranking2);
     app.use("/trends", trends);
     app.use("/info", info);
 

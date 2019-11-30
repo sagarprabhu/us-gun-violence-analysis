@@ -1,0 +1,132 @@
+<head>
+    <title>Ranking</title>
+</head>
+
+<style>
+    body {
+        padding-top: 7%;
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    table {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    tr,
+    td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td,
+    #customers th {
+        border: 1px solid #ddd;
+        padding: 4px;
+    }
+
+    #customers tr:nth-child(even) {
+        background-color: rgba(206, 27, 40, 0.4);
+    }
+
+    #customers tr:hover {
+        background-color: gray;
+    }
+
+    #customers thead {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: left;
+        background-color: rgba(206, 27, 40, 1);
+        color: white;
+    }
+</style>
+
+<center>
+</center>
+<h1 style="text-align: center">Rankings</h1>
+<form action="/ranking2" method="POST">
+
+    <div style="float:left;width:50%">
+        Year:
+        <select name="year" style="width:70%;padding-top:0%" required>
+            <option value="" disabled selected hidden>Select a year</option>
+            <option value="All Years"> All Years </option>
+            <option value="2013"> 2013 </option>
+            <option value="2014"> 2014 </option>
+            <option value="2015"> 2015 </option>
+            <option value="2016"> 2016 </option>
+            <option value="2017"> 2017 </option>
+            <option value="2018"> 2018 </option>
+        </select>
+        <br />
+        Rank by:
+        <select name="attribute" style="width:70%;padding-top:0%" required>
+            <option value="" disabled selected hidden>Select an attribute</option>
+            <option value="n_killed"> People killed </option>
+            <option value="n_injured"> People injured </option>
+            <option value="n_guns_involved"> Total guns used </option>
+        </select>
+        <br />
+        <br />
+    </div>
+    <div style="float:right;width:50%">
+        Number of rows:
+        <input type="text" name="rows" placeholder="Select rows to return" style="width:70%" required />
+        <br />
+        Order:
+        <select name="order" style="width:70%;padding-top:0%" required>
+            <option value="" disabled selected hidden>Select an order</option>
+            <option value="asc"> Ascending </option>
+            <option value="desc"> Descending </option>
+        </select>
+        <br />
+        <br />
+    </div>
+
+
+    <div style="padding-left: 35%; padding-top: 20%">
+        <input type="submit" class="button" value="Fetch Result">
+    </div>
+</form>
+
+
+<br>
+<br>
+{{!-- </center> --}}
+
+
+
+
+{{#if NOCRIME}}
+<h2 style="padding-left:15%"><i>No crimes committed during this period</i></h2>
+{{/if}}
+{{#if data}}
+<center>
+    <table border='1' id="rankings" style="padding-right:25%">
+        <thead>
+            <tr>
+                <td>Rank</td>
+                <td>{{attribute}}</td>
+                <td>State</td>
+            </tr>
+        </thead>
+        {{#each data}}
+        <tr>
+            <td>{{inc @index}}</td>
+            <td>{{this.[0]}}</td>
+            <td>{{this.[1]}}</td>
+
+        </tr>
+        {{/each}}
+    </table>
+</center>
+{{/if}}
+<br />
