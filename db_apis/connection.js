@@ -11,7 +11,7 @@ oracledb.getConnection(
       console.error(err);
       return;
     }
-    connection.execute("SELECT * from crime", function(err, result) {
+    connection.execute("SELECT * from country", function(err, result) {
       if (err) {
         console.error(err);
         return;
