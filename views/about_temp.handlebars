@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <br>
+    <div style="background-color: rgb(238, 20, 31); padding-bottom: 0px; padding-top: 0px"
+        class=" jumbotron container-fluid text-center">
+        <i>
+            <h2><b><u style="color:black">US Crime Data Analysis</u></b></h2>
+        </i>
+    </div>
+
+    <div style="background-color: lightgrey; border-radius: 20px" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3><u>About Database</u></h3>
+                <p>
+                    <b><i> This dataset reflects .... The
+                            source is <a
+                                href="https://data.lacity.org/A-Safe-City/Crime-Data-from-2010-to-Present/y8tr-7khq"
+                                style="color: darkblue">abc.xyz.org</a>
+                            ... Click below buttons to get count of records
+                            in respective table </i></b>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <a href="/about?id=employees"><input type="button" value="Employees" style="width: 160px"></a>
+            {{#if employees}}
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{employees}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/about?id=employment_status"><input type="button" value="Employment Status"
+                    style="width: 160px"></a>
+            {{#if employment_status}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{employment_status}}</b>
+
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/about?id=firearms_provisions"><input type="button" value="Firearm Provisions"
+                    style="width: 160px"></a>
+            {{#if firearms_provisions}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{firearms_provisions}}</b>
+            {{/if}}
+        </div>
+        <div class="col-md-2">
+            <a href="/about?id=gun_incidents"><input type="button" value="Gun Incidents" style="width: 160px"></a>
+            {{#if gun_incidents}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{gun_incidents}}</b>
+            {{/if}}
+        </div>
+        <div class="col-md-2">
+            <a href="/about?id=president_vote"><input type="button" value="President Vote" style="width: 160px"></a>
+            {{#if president_vote}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{president_vote}}</b>
+            {{/if}}
+        </div>
+        <br><br><br><br><br><br>
+        <div class="col-md-2">
+            <a href="/about?id=state"><input type="button" value="State" style="width: 160px"></a>
+            {{#if state}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{state}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/about?id=unemployment_rate"><input type="button" value="Unemployment Rate"
+                    style="width: 160px"></a>
+            {{#if unemployment_rate}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{unemployment_rate}}</b>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            <a href="/about?id=vote"><input type="button" value="Vote" style="width: 160px"></a>
+            {{#if vote}}
+
+            <br><br>
+            &nbsp
+            &nbsp
+            &nbsp<b>{{vote}}</b>
+            {{/if}}
+
+        </div>
+        <br><br><br><br>
+    </div>
+
+</body>
+
+</html>

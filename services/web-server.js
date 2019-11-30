@@ -5,8 +5,10 @@ const webServerConfig = require("../config/web-server.js");
 const rankingPage = require("./router.js");
 const home = require("./home.js");
 const info = require("./info.js");
+const about = require("./about.js");
 const comparisonPage = require("./compareChart.js");
 const viewReport = require("./viewReport.js");
+const report = require("./report.js");
 const ranking2 = require("./ranking2.js");
 const trends = require("./trends_2.js");
 const exphbs = require("express-handlebars");
@@ -33,11 +35,13 @@ function initialize() {
     app.use(express.static(__dirname + "/../public"));
     app.use("/", home);
     app.use("/ranking", rankingPage);
+    app.use("/report", report);
     app.use("/comparison", comparisonPage);
     app.use("/viewReport", viewReport);
     app.use("/ranking2", ranking2);
     app.use("/trends", trends);
     app.use("/info", info);
+    app.use("/about", about);
 
     httpServer
       .listen(webServerConfig.port)
