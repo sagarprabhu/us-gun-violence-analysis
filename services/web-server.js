@@ -11,6 +11,7 @@ const viewReport = require("./viewReport.js");
 const report = require("./report.js");
 const ranking2 = require("./ranking2.js");
 const trends = require("./trends_2.js");
+const trends1 = reuire("./trends.js");
 const exphbs = require("express-handlebars");
 // const router = express.Router();
 let httpServer;
@@ -40,6 +41,7 @@ function initialize() {
     app.use("/viewReport", viewReport);
     app.use("/ranking2", ranking2);
     app.use("/trends", trends);
+    app.use("/trends1", trends1);
     app.use("/info", info);
     app.use("/about", about);
 

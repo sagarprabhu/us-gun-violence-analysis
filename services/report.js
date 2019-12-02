@@ -9,7 +9,6 @@ const exphbs = require("express-handlebars");
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/", function(request, res, next) {
-  // console.log("Hello world");
   res.render("report_temp.handlebars");
 });
 
