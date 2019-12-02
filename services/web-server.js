@@ -11,8 +11,9 @@ const viewReport = require("./viewReport.js");
 const report = require("./report.js");
 const ranking2 = require("./ranking2.js");
 const trends = require("./trends_2.js");
-const trends1 = reuire("./trends.js");
+const trends1 = require("./trends.js");
 const exphbs = require("express-handlebars");
+const regression = require("./regression.js");
 // const router = express.Router();
 let httpServer;
 
@@ -44,6 +45,7 @@ function initialize() {
     app.use("/trends1", trends1);
     app.use("/info", info);
     app.use("/about", about);
+    app.use("/regression", regression);
 
     httpServer
       .listen(webServerConfig.port)
