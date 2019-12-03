@@ -15,7 +15,7 @@ router.get("/", function(request, res, next) {
 router.post("/", function(request, res) {
   var data = {
     year: request.body.year,
-    state: `'${request.body.state}'`
+    state: request.body.state
   };
   var attribute_to_name = {
     n_killed: "People killed",
@@ -35,18 +35,18 @@ router.post("/", function(request, res) {
                               FROM (
                                   SELECT max(candidatevotes) as maxCandidatevotes, us_state, unemployment_rate.year as year
                                   FROM unemployment_rate, president_vote
-                                  WHERE unemployment_rate.state = ${data.state} and president_vote.us_state = ${data.state} and unemployment_rate.year = ${data.year}
+                                  WHERE unemployment_rate.state = '${data.state}' and president_vote.us_state = '${data.state}' and unemployment_rate.year = ${data.year}
                                   and 
                                   unemployment_rate.year BETWEEN president_vote.voting_year and president_vote.voting_year+3
                                   group by us_state, unemployment_rate.year
                                   ) h,
                                   president_vote pv
-                              WHERE h.maxCandidatevotes = pv.candidatevotes and pv.us_state = ${data.state} and h.year BETWEEN pv.voting_year and pv.voting_year+3
+                              WHERE h.maxCandidatevotes = pv.candidatevotes and pv.us_state = '${data.state}' and h.year BETWEEN pv.voting_year and pv.voting_year+3
                               ) t
-                      WHERE gun_incidents.us_state = ${data.state} and  gun_incidents.incident_year = ${data.year}
+                      WHERE gun_incidents.us_state = '${data.state}' and  gun_incidents.incident_year = ${data.year}
                       group by candidate, party, maxCandidatevotes, totalvotes, gun_incidents.us_state, t.year
                       ) t2
-  WHERE DEMOGRAPHIC.us_state = ${data.state} and DEMOGRAPHIC.demographic_year = ${data.year}
+  WHERE DEMOGRAPHIC.us_state = '${data.state}' and DEMOGRAPHIC.demographic_year = ${data.year}
   `;
   avg_query = `
   SELECT d.*, gi.*, 'avg' as candidate, 'avg' as party, h2.*, 'entire us' as us_state, ${data.year} as year

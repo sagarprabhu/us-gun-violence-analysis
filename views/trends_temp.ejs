@@ -72,7 +72,7 @@
       </ul>
     </nav>
     <h1 style="padding-left:40%;padding-top: 2%">TRENDS PAGE</h1>
-    <form action="/trends1" method="post" style="padding-left:3%">
+    <form action="/trends" method="post" style="padding-left:3%">
       <% {%>
       <div style="float:left;width:60%">
         <h3>Select State:</h3>
@@ -108,7 +108,7 @@
             value="Maryland"
           />Maryland<br />
         </div>
-        <div id="inputs" style="float: left;width:20%">
+        <div style="float: left;width:20%">
           <input
             type="checkbox"
             class="myinput"
@@ -121,62 +121,120 @@
             name="area"
             value="Van Nuys"
           />Van Nuys<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Alabama"
+          />Alabama<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Louisiana"
+          />Louisiana<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Arizona"
+          />Arizona<br />
+        </div>
+        <div style="float: left;width:20%">
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Nevada"
+          />Nevada<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Georgia"
+          />Georgia<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Virginia"
+          />Virginia<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Texas"
+          />Texas<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Washington"
+          />Washington<br />
+        </div>
+        <div style="float: left;width:20%">
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Wisconsin"
+          />Wisconsin<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Tennessee"
+          />Tennessee<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Pennsylvania"
+          />Pennsylvania<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Oklahoma"
+          />Oklahoma<br />
+          <input
+            type="checkbox"
+            class="myinput"
+            name="area"
+            value="Missouri"
+          />Missouri<br />
         </div>
       </div>
       <div style="float:right;width:40%">
-        <h3>Select Crime:</h3>
+        <h3>Select Parameter :</h3>
         <input
           type="radio"
           class="form-radio"
           name="crime"
-          value="RAPE"
+          value="Mass Shooting"
           checked="checked"
         />
-        RAPE<br />
-        <input type="radio" class="form-radio" name="crime" value="THEFT" />
-        THEFT<br />
+        Mass Shooting<br />
+        <input type="radio" class="form-radio" name="crime" value="Drive-by" />
+        Drive-By<br />
         <input
           type="radio"
           class="form-radio"
           name="crime"
-          value="ASSAULT"
-        />ASSAULT<br />
+          value="Armed robbery"
+        />Armed Robbery<br />
         <input
           type="radio"
           class="form-radio"
           name="crime"
-          value="FIREARMS"
-        />FIREARMS<br />
+          value="People Killed"
+        />People Killed<br />
         <input
           type="radio"
           class="form-radio"
           name="crime"
-          value="SEXUAL CRIMES"
-        />SEXUAL CRIMES<br />
-        <input
-          type="radio"
-          class="form-radio"
-          name="crime"
-          value="VANDALISM"
-        />VANDALISM<br />
-        <input
-          type="radio"
-          class="form-radio"
-          name="crime"
-          value="BURGLARY"
-        />BURGLARY<br />
-        <input
-          type="radio"
-          class="form-radio"
-          name="crime"
-          value="ABORTION"
-        />ABORTION<br />
-        <input
-          type="radio"
-          class="form-radio"
-          name="crime"
-          value="DRIVING"
-        />DRIVING<br />
+          value="Unemployment Rate"
+        />Unemployment Rate<br />
         <br />
         <br />
       </div>
@@ -189,6 +247,7 @@
 
     <% if(one!=""){%>
     <br /><br />
+    <h2><%=crime%> trend of <%=area%> over the years</h2>
     <div class="chart">
       <canvas id="chart-demo-1" width="300" height="100"></canvas>
     </div>
@@ -214,7 +273,7 @@
 
           data: {
 
-            labels: ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+            labels: ['2013', '2014', '2015', '2016', '2017', '2018'],
             datasets: [
             {
             label: "<%=area[0]%>",
@@ -246,7 +305,7 @@
             },
             title:{
               display:true,
-              text:'Crime Trends of Los Angeles City'
+              text:''
             },
             scales:{
 

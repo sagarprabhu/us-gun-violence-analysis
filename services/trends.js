@@ -10,7 +10,7 @@ var array;
 var one = [];
 
 router.get("/", function(req, res) {
-  res.render("../views/see.ejs", { one: "" });
+  res.render("trends_temp.ejs", { one: "" });
 });
 
 router.post("/", async function(req, res) {
@@ -18,9 +18,9 @@ router.post("/", async function(req, res) {
   handleaction(req, res);
   await new Promise(resolve => setTimeout(resolve, 2000));
   // console.log(one);
-  res.render("../views/see.ejs", {
+  res.render("trends_temp.ejs", {
     area: array,
-    crime: crime,
+    crime: attribute,
     one: one,
     first: one[0],
     second: one[1],
@@ -46,8 +46,8 @@ function handleOperation(request, response, callback) {
 
   oracledb.getConnection(
     {
-      user: process.env.DB_USER || "aj3",
-      password: process.env.DB_PASSWORD || "Database1",
+      user: process.env.DB_USER || "jthies",
+      password: process.env.DB_PASSWORD || "dbaccess001",
       connectString:
         "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.cise.ufl.edu)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl)))"
     },
@@ -61,8 +61,8 @@ function handleOperation(request, response, callback) {
 
 //handleaction start
 function handleaction(req, res) {
-  area = req.body.area;
-  crime = req.body.crime;
+  state = req.body.area;
+  attribute = req.body.crime;
   // console.log(area);
   // console.log(crime);
   /* if (typeof area === "string") {
@@ -70,7 +70,8 @@ function handleaction(req, res) {
     array = Object.values(array);
   } else array = Object.values(area);*/
 
-  array = Object.values(area);
+  array = Object.values(state);
+  console.log(array);
   // console.log("Areas are");
   // console.log(array);
 
@@ -80,41 +81,38 @@ function handleaction(req, res) {
     function(request, response, connection) {
       for (var k = 0; k < array.length; k++) {
         //    selectStatement= "select  EXTRACT(YEAR FROM TO_DATE(DATE_OCCURRED) ), count(*) from incident where incident.dr_no IN  ( SELECT reports.dr_no FROM location,reports where location.coordinates=reports.coordinates  and reports.crime_code IN  ( SELECT crime_code FROM crime WHERE  description LIKE '%'||:c||'%' ) and location.area_id= (SELECT area_id from area where area_name=:a)  ) group by  EXTRACT(YEAR FROM TO_DATE(DATE_OCCURRED)) ORDER BY EXTRACT(YEAR FROM TO_DATE(DATE_OCCURRED))" ;
-        selectStatement =
-          "select  EXTRACT(YEAR FROM TO_DATE(DATE_OCCURRED)) as year, count(*) from incident where incident.dr_no IN  ( SELECT reports.dr_no FROM location,reports where location.coordinates=reports.coordinates  and reports.crime_code IN  ( SELECT crime_code FROM crime WHERE  description LIKE '%'||:c||'%' ) and location.area_id= (SELECT area_id from area where area_name=:a)  ) group by  EXTRACT(YEAR FROM TO_DATE(DATE_OCCURRED)) ORDER BY EXTRACT(YEAR FROM TO_DATE(DATE_OCCURRED))";
-        connection.execute(
-          selectStatement,
-
-          { c: crime, a: array[k] },
-          function(err, result) {
-            if (err) {
-            } else {
-              var ans = result.rows;
-              var new_arr = [];
-              // console.log(result.rows);
-              var final_arr = new Array(10);
-              final_arr.fill(0);
-              // console.log("Final");
-              // console.log(final_arr);
-              for (var i = 0; i < ans.length; i++) {
-                new_arr[i] = ans[i][0];
-              }
-              var z = 0;
-              for (var i = 2010; i < 2020; i++) {
-                if (new_arr.includes(i)) {
-                  final_arr[i % 10] = ans[z++][1];
-                }
-              }
-
-              // console.log("Updated array");
-              // console.log(final_arr);
-              // for()
-              one.push(final_arr);
-
-              //  console.log(one);
+        selectStatement = `select EXTRACT(YEAR FROM TO_DATE(incident_date, 'YYYY-MM-DD')) as year, count(*) from gun_incidents
+          where incident_characteristics like '%${attribute}%' and us_state = '${array[k]}'
+          group by EXTRACT(YEAR FROM TO_DATE(incident_date, 'YYYY-MM-DD'))
+          order by EXTRACT(YEAR FROM TO_DATE(incident_date, 'YYYY-MM-DD')) asc
+          `;
+        console.log(selectStatement);
+        connection.execute(selectStatement, {}, function(err, result) {
+          if (err) {
+          } else {
+            var ans = result.rows;
+            var final_arr = [];
+            console.log(result.rows);
+            // final_arr.fill(0);
+            // // console.log("Final");
+            // // console.log(final_arr);
+            for (var i = 0; i < ans.length; i++) {
+              final_arr[i] = ans[i][1];
             }
+            // var z = 0;
+            // for (var i = 2010; i < 2020; i++) {
+            //   if (new_arr.includes(i)) {
+            //     final_arr[i % 10] = ans[z++][1];
+            //   }
+            // }
+
+            // // console.log("Updated array");
+            console.log(final_arr);
+            // // for()
+            one.push(final_arr);
+            console.log(one);
           }
-        ); //execute
+        }); //execute
 
         // console.log(one);
       } //FOR
