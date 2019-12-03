@@ -40,16 +40,16 @@ function initialize() {
     app.set("view engine", "handlebars");
     app.use(express.static(__dirname + "/../public"));
     app.use("/", home);
-    app.use("/ranking", rankingPage);
+    //  app.use("/ranking", rankingPage);
     app.use("/report", report);
-    app.use("/comparison", comparisonPage);
-    app.use("/viewReport", viewReport);
-    app.use("/ranking2", ranking2);
+    app.use("/regression", regression);
+    //  app.use("/comparison", comparisonPage);
+    // app.use("/viewReport", viewReport);
+    app.use("/ranking", ranking2);
     app.use("/trends", trends);
     //  app.use("/trends2", trends2);
-    app.use("/info", info);
+    //   app.use("/info", info);
     app.use("/about", about);
-    app.use("/regression", regression);
 
     httpServer
       .listen(webServerConfig.port)
