@@ -16,7 +16,8 @@ router.get("/", function(request, res, next) {
 router.post("/", function(request, res) {
   var data = {
     attribute: request.body.attribute,
-    x: request.body.x
+    x: request.body.x,
+    year: request.body.year
   };
   var attribute_to_name = {
     n_killed: "People killed",
@@ -34,11 +35,11 @@ router.post("/", function(request, res) {
                         x, y, us_state
                                 from
                                     (select count(incident_id) as y, us_state from
-                                    gun_incidents where incident_year = 2016 
+                                    gun_incidents where incident_year = ${data.year} 
                                     group by us_state) t1,
                                     
                                     (select AVG(rate) as x, state from
-                                    UNEMPLOYMENT_RATE where year = 2016
+                                    UNEMPLOYMENT_RATE where year = ${data.year}
                                     group by state) t2
                                     
                                 where t1.us_state = t2.state
@@ -64,11 +65,11 @@ router.post("/", function(request, res) {
                                     us_state
                                 from
                                     (select count(incident_id) as y, us_state from
-                                    gun_incidents where incident_year = 2016 
+                                    gun_incidents where incident_year = ${data.year} 
                                     group by us_state) t1,
                                     
                                     (select AVG(rate) as x, state from
-                                    UNEMPLOYMENT_RATE where year = 2016
+                                    UNEMPLOYMENT_RATE where year = ${data.year}
                                     group by state) t2
                                     
                                     where t1.us_state = t2.state
@@ -79,11 +80,11 @@ router.post("/", function(request, res) {
                                     x, y
                                 from
                                     (select count(incident_id) as y, us_state from
-                                    gun_incidents where incident_year = 2016 
+                                    gun_incidents where incident_year = ${data.year} 
                                     group by us_state) t1,
                                     
                                     (select AVG(rate) as x, state from
-                                    UNEMPLOYMENT_RATE where year = 2016
+                                    UNEMPLOYMENT_RATE where year = ${data.year}
                                     group by state) t2
                                     
                                 where t1.us_state = t2.state
@@ -118,13 +119,25 @@ router.post("/", function(request, res) {
               });
             } else {
               slope_intercept = result.rows.pop();
-
-              //   console.log(result.rows);
+              y_predicted =
+                slope_intercept[0] * parseInt(data.x) + slope_intercept[1];
+              console.log(result.rows);
               //   console.log(result.rows.length, slope_intercept);
-
+              x_arr = [];
+              y_arr = [];
+              state_arr = [];
+              for (var i = 0; i < result.rows.length; i++) {
+                x_arr.push(result.rows[i][0]);
+                y_arr.push(result.rows[i][1]);
+                state_arr.push(`"${result.rows[i][2]}"`);
+              }
+              console.log(x_arr, y_arr, state_arr);
               res.render("regression_temp.handlebars", {
-                data: result.rows,
-                slope_intercept: slope_intercept
+                attribute: `"${data.attribute}"`,
+                state_arr: state_arr,
+                x_arr: x_arr,
+                y_arr: y_arr,
+                y_predicted: Math.round(y_predicted)
               });
             }
           }

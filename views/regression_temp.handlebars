@@ -63,6 +63,17 @@
             <option value="UNEMPLOYMENT_RATE"> Unemployment rate </option>
         </select>
         <br />
+        Year:
+        <select name="year" style="width:70%;padding-top:0%" required>
+            <option value="" disabled selected hidden>Select a year</option>
+            <option value="2013"> 2013 </option>
+            <option value="2014"> 2014 </option>
+            <option value="2015"> 2015 </option>
+            <option value="2016"> 2016 </option>
+            <option value="2017"> 2017 </option>
+            <option value="2018"> 2018 </option>
+        </select>
+        <br />
         <br />
     </div>
     <div style="float:right;width:50%">
@@ -82,24 +93,28 @@
 {{!-- </center> --}}
 
 <script type="text/javascript">
-    console.log({{ arr data }});
+    state_arr = [{{{ state_arr }}}];
+    x_arr = [{{ x_arr }}];
+    y_arr = [{{ y_arr }}];
+    attribute = [{{{ attribute }}}][0];
+    input_data = [[{{{ attribute }}}, 'Number of incidents', { role: 'annotation' }]];
+    for (var i = 0; i < x_arr.length; i++) {
+        input_data.push([x_arr[i], y_arr[i], state_arr[i]]);
+    }
+    console.log(input_data);
     google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-
+    if (input_data.length > 1) {
+        google.charts.setOnLoadCallback(drawChart);
+    }
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Unemployment rate', 'Number of incidents', { role: 'annotation' }],
-            [8, 12, 'Point 1'],
-            [4, 5.5, 'Point 1'],
-            [11, 14, 'Point 1'],
-
-        ]);
+        var data = google.visualization.arrayToDataTable(input_data);
 
         var options = {
-            title: 'Age vs. Weight comparison',
-            hAxis: { title: 'Unemployment rate', minValue: 0, maxValue: 15 },
-            vAxis: { title: 'Number of incidents', minValue: 0, maxValue: 15 },
-            legend: 'none'
+            title: 'Scatter Plot',
+            hAxis: { title: attribute, minValue: 0, maxValue: x_arr.maxValue },
+            vAxis: { title: 'Number of incidents', minValue: 0, maxValue: y_arr.minValue },
+            legend: 'none',
+            trendlines: { 0: {} }    // Draw a trendline for data series 0.
         };
 
         var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
@@ -107,6 +122,9 @@
         chart.draw(data, options);
     }
 </script>
+{{#if y_predicted}}
+<h3>Estimated Incidents(y): {{y_predicted}}</h3>
+{{/if}}
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
 
