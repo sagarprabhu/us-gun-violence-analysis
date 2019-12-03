@@ -28,6 +28,10 @@ function initialize() {
       helpers: {
         inc: function(value, options) {
           return parseInt(value) + 1;
+        },
+        arr: function(value, options) {
+          console.log(value);
+          return value;
         }
       }
     });

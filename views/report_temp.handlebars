@@ -1,5 +1,5 @@
 <head>
-    <title>Summary Report</title>
+    <title>State Statistics Report</title>
 </head>
 
 <style>
@@ -51,7 +51,7 @@
 
 <center>
 </center>
-<h1 style="text-align: center">Rankings</h1>
+<h1 style="text-align: center">State Statistics Report</h1>
 <form action="/report" method="POST">
 
     <div style="float:left;width:50%">
@@ -67,27 +67,65 @@
             <option value="2018"> 2018 </option>
         </select>
         <br />
-        Rank by:
-        <select name="attribute" style="width:70%;padding-top:0%" required>
-            <option value="" disabled selected hidden>Select an attribute</option>
-            <option value="n_killed"> People killed </option>
-            <option value="n_injured"> People injured </option>
-            <option value="n_guns_involved"> Total guns used </option>
-        </select>
-        <br />
         <br />
     </div>
     <div style="float:right;width:50%">
-        Number of rows:
-        <input type="text" name="rows" placeholder="Select rows to return" style="width:70%" required />
-        <br />
-        Order:
-        <select name="order" style="width:70%;padding-top:0%" required>
-            <option value="" disabled selected hidden>Select an order</option>
-            <option value="asc"> Ascending </option>
-            <option value="desc"> Descending </option>
-        </select>
-        <br />
+        Select state:
+        <select name="state" id="state">
+            <option value="" disabled selected hidden>Select a State</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <option value="District Of Columbia">District Of Columbia</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Hampshire">New Hampshire</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="New York">New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+        </select><br />
+
         <br />
     </div>
 
@@ -108,22 +146,78 @@
 {{#if NOCRIME}}
 <h2 style="padding-left:15%"><i>No crimes committed during this period</i></h2>
 {{/if}}
+
 {{#if data}}
 <center>
+    <h2>{{heading}}</h2>
     <table border='1' id="rankings" style="padding-right:25%">
         <thead>
             <tr>
-                <td>Rank</td>
-                <td>{{attribute}}</td>
-                <td>State</td>
+                <td>High school graduate</td>
+                <td>bachelors_degree</td>
+                <td>native_born_in_united_states</td>
+                <td>killedSum</td>
+                <td>injuredSum</td>
+                <td>candidate</td>
+                <td>party</td>
+                <td>maxCandidatevotes</td>
+                <td>totalvotes</td>
+                <td>us_state</td>
+                <td>year</td>
             </tr>
         </thead>
         {{#each data}}
         <tr>
-            <td>{{inc @index}}</td>
             <td>{{this.[0]}}</td>
             <td>{{this.[1]}}</td>
-
+            <td>{{this.[2]}}</td>
+            <td>{{this.[3]}}</td>
+            <td>{{this.[4]}}</td>
+            <td>{{this.[5]}}</td>
+            <td>{{this.[6]}}</td>
+            <td>{{this.[7]}}</td>
+            <td>{{this.[8]}}</td>
+            <td>{{this.[9]}}</td>
+            <td>{{this.[10]}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</center>
+{{/if}}
+{{#if avg}}
+<center>
+    <h2>Average across all the states</h2>
+    <table border='1' id="rankings" style="padding-right:25%">
+        <thead>
+            <tr>
+                <td>High school graduate</td>
+                <td>bachelors_degree</td>
+                <td>Foreign born</td>
+                <td>native_born_in_united_states</td>
+                <td>killed avg</td>
+                <td>injured avg</td>
+                <td>candidate</td>
+                <td>party</td>
+                <td>maxCandidatevotes</td>
+                <td>totalvotes</td>
+                <td>us_state</td>
+                <td>year</td>
+            </tr>
+        </thead>
+        {{#each avg}}
+        <tr>
+            <td>{{this.[0]}}</td>
+            <td>{{this.[1]}}</td>
+            <td>{{this.[2]}}</td>
+            <td>{{this.[3]}}</td>
+            <td>{{this.[4]}}</td>
+            <td>{{this.[5]}}</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>{{this.[9]}}</td>
+            <td>{{this.[10]}}</td>
+            <td>{{this.[11]}}</td>
+            <td>{{this.[12]}}</td>
         </tr>
         {{/each}}
     </table>
